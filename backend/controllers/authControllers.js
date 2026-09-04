@@ -18,7 +18,7 @@ const generateTokens = async (user) => {
     expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
   });
 
-  return { accessToken, RefreshToken: rawToken };
+  return { accessToken, refreshToken: rawToken };
 }
 
 const signup = async (req, res) => {
@@ -70,3 +70,5 @@ const login = async (req, res) => {
     res.status(400).json({ message: err.message });
   }
 }
+
+module.exports = { signup, login };

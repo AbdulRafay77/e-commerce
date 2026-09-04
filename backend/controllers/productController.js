@@ -9,7 +9,7 @@ const getProducts = async (req, res) => {
   }
 };
 
-const createdProduct = async (req, res) => {
+const createProduct = async (req, res) => {
   try{
     const { name, desciption, price, stock, category, imageURL } = req.body;
 
@@ -58,3 +58,5 @@ const deleteProduct = async (req, res) => {
     res.status(400).json({ message: err.message });
   }
 };
+
+module.exports = { getProducts, createProduct, updateProduct, deleteProduct };
