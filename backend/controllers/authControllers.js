@@ -109,7 +109,7 @@ const logout = async (req, res) => {
     const token = req.cookies.refreshToken;
 
     if (token){
-      await RefreshToken.findByIdAndDelete({ token });
+      await RefreshToken.findOneAndDelete({ token });
     }
 
     res.clearCookie('refreshToken');
