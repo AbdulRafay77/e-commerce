@@ -11,7 +11,7 @@ const getProducts = async (req, res) => {
 
 const createProduct = async (req, res) => {
   try{
-    const { name, desciption, price, stock, category, imageURL } = req.body;
+    const { name, description, price, stock, category, imageURL } = req.body;
 
     const product = await Product.create({ 
       name,
@@ -40,6 +40,8 @@ const updateProduct = async (req, res) => {
     if (!product){
       return res.status(404).json({ message: 'Product not found' });
     }
+
+    res.status(200).json({product});
   }catch(err){
     res.status(401).json({ message: err.message });
   }
