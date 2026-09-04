@@ -19,7 +19,7 @@ const generateTokens = async (user) => {
   });
 
   return { accessToken, refreshToken: rawToken };
-}
+};
 
 const signup = async (req, res) => {
   try{
@@ -40,7 +40,7 @@ const signup = async (req, res) => {
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
-}
+};
 
 const login = async (req, res) => {
   try {
@@ -69,6 +69,54 @@ const login = async (req, res) => {
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
-}
+};
 
-module.exports = { signup, login };
+const refresh = async (req, res) => {
+  try {
+    const token = req.cookies.refreshToken;
+
+    if(!token) {
+      return res.status(401).json({ message: 'No refresh token' });
+    }
+
+    const storedToken = await RefreshToken.findOne({ token });
+
+    if(!storedToken){
+      return res.status(401).json({ message: 'Invalid refresh token' });
+    }
+
+    await RefreshToken.findByIdAndDelete(storedToken._id);
+
+    const user = await User.findById(storedToken.userId);
+
+    const { accessToken, refreshToken } = await generateTokens(user);
+
+    res.cookie('refreshToken', refreshToken, {
+      httpOnly: true,
+      sameSite: 'strict',
+      maxAge: 7 * 24 * 60 * 60 * 1000
+    });
+
+    res.status(200).json({ accessToken });
+    
+  }catch (err){
+    res.status(401).json({ message: err.message });
+  }
+};
+
+const logout = async (req, res) => {
+  try {
+    const token = req.cookies.refreshToken;
+
+    if (token){
+      await RefreshToken.findByIdAndDelete({ token });
+    }
+
+    res.clearCookie('refreshToken');
+    res.status(200).json({ message: 'Logged out' });
+  }catch(err){
+    res.status(500).json({ message: err.message });
+  }
+};
+
+module.exports = { signup, login, refresh, logout };
