@@ -1,6 +1,5 @@
 const mongoose= require('mongoose');
 const User = require('./User');
-const { applyTimestamps } = require('./RefreshToken.js');
 
 const productSchema = new mongoose.Schema({
   name: {
