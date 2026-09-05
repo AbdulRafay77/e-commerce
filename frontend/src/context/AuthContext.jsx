@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState, useEffect } from 'react';
 import api, { setAccessToken as setApiToken } from '../api/axios.js';
 
 const AuthContext = createContext();
@@ -6,6 +6,24 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [accessToken, setAccessToken] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const restoreSession = async () => {
+      try {
+        const res = await api.post('/auth/refresh');
+        setAccessToken(res.data.accessToken);
+        setApiToken(res.data.accessToken);
+        setUser(res.data.user);
+      } catch (err) {
+        // no valid refresh token — stays logged out, this is expected
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    restoreSession();
+  }, []);
 
   const login = async (email, password) => {
     const res = await api.post('/auth/login', { email, password });
@@ -29,7 +47,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, accessToken, login, signup, logout }}>
+    <AuthContext.Provider value={{ user, accessToken, login, signup, logout, loading }}>
       {children}
     </AuthContext.Provider>
   );

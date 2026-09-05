@@ -64,7 +64,7 @@ const login = async (req, res) => {
       maxAge: 7 * 24 * 60 * 60 * 1000
     });
 
-    res.status(200).json({ accessToken, user: { id: user._id, username: user.username, role: user.role } })
+    res.status(200).json({ accessToken, user: { id: user._id, username: user.username, role: user.role } });
 
   } catch (err) {
     res.status(400).json({ message: err.message });
@@ -97,7 +97,7 @@ const refresh = async (req, res) => {
       maxAge: 7 * 24 * 60 * 60 * 1000
     });
 
-    res.status(200).json({ accessToken });
+    res.status(200).json({ accessToken, user: { id: user._id, username: user.username, role: user.role } });
     
   }catch (err){
     res.status(401).json({ message: err.message });
