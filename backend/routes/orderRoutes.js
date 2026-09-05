@@ -4,8 +4,8 @@ const { createOrder, getMyOrders, getAllOrders } = require('../controllers/order
 const requireRole = require('../middleware/roleMiddleware.js');
 const auth = require('../middleware/authMiddleware.js');
 
-router.post('/createOrder', auth, createOrder);
-router.get('/getMyOrders', auth, getMyOrders);
-router.get('/getAllOrders',auth, requireRole('admin'),  getAllOrders);
+router.post('/', auth, createOrder);
+router.get('/my', auth, getMyOrders);
+router.get('/all',auth, requireRole('admin'),  getAllOrders);
 
 module.exports = router;
