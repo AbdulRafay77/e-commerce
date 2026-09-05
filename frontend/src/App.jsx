@@ -1,10 +1,15 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { useAuth } from './context/AuthContext';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Products from './pages/Products';
 import Navbar from './components/Navbar';
 
 function App() {
+  const { loading } = useAuth();
+
+  if (loading) return null;
+
   return (
     <BrowserRouter>
       <Navbar />
