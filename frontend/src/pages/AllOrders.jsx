@@ -68,7 +68,7 @@ const AllOrders = () => {
             <ul className="border-t pt-3 space-y-1">
               {order.items.map((item) => (
                 <li key={item._id} className="text-sm text-gray-700">
-                  Product: {item.product.name} — Qty: {item.quantity} — Price: ${item.price}
+                  Product: {item.product ? item.product.name : '(product no longer available)'} — Qty: {item.quantity} — Price: ${item.price}
                 </li>
               ))}
             </ul>
