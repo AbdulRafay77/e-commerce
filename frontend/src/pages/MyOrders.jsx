@@ -34,7 +34,7 @@ const MyOrders = () => {
           <ul>
             {order.items.map((item) => (
               <li key={item._id}>
-                Product: {item.product} — Qty: {item.quantity} — Price: ${item.price}
+                Product: {item.product.name} — Qty: {item.quantity} — Price: ${item.price}
               </li>
             ))}
           </ul>

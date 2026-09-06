@@ -47,7 +47,7 @@ const createOrder = async (req, res) => {
 
 const getMyOrders = async (req, res) => {
   try{
-    const myOrders = await Order.find({ user: req.user.id });
+    const myOrders = await Order.find({ user: req.user.id }).populate('items.product');
     res.status(200).json(myOrders);
 
   }catch(err){
@@ -58,7 +58,7 @@ const getMyOrders = async (req, res) => {
 const getAllOrders = async (req, res) => {
   
   try{
-    const allOrders = await Order.find();
+    const allOrders = await Order.find().populate('items.product');
     res.status(200).json(allOrders);
   }catch(err){
     res.status(400).json({ message: err.message });
