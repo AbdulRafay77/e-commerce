@@ -7,6 +7,7 @@ import Navbar from './components/Navbar';
 import MyOrders from './pages/MyOrders';
 import ProtectedRoute from './components/ProtectedRoute';
 import CreateProduct from './pages/CreateProduct';
+import AllOrders from './pages/AllOrders';
 
 function App() {
   const { loading } = useAuth();
@@ -33,6 +34,14 @@ function App() {
           element={
             <ProtectedRoute requiredRole="admin">
               <CreateProduct />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/orders"
+          element={
+            <ProtectedRoute requiredRole="admin">
+              <AllOrders />
             </ProtectedRoute>
           }
         />
