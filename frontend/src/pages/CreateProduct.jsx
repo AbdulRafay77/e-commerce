@@ -90,6 +90,15 @@ const CreateProduct = () => {
           placeholder="Image URL"
           className="w-full border rounded-lg p-3 mb-4"
         />
+        {imageURL && (
+          <img
+            src={imageURL}
+            alt="Preview"
+            onError={(e) => { e.target.style.display = 'none'; }}
+            onLoad={(e) => { e.target.style.display = 'block'; }}
+            className="w-full h-40 object-cover rounded mb-4"
+          />
+        )}
         <button type="submit" className="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 rounded-lg">Create Product</button>
       </form>
     </div>

@@ -10,6 +10,7 @@ const Products = () => {
   const [orderMessage, setOrderMessage] = useState('');
   const [editingId, setEditingId] = useState(null);
   const [editForm, setEditForm] = useState({});
+  const [imgError, setImgError] = useState({});
   const { user } = useAuth();
 
   useEffect(() => {
@@ -137,6 +138,12 @@ const Products = () => {
               </>
             ) : (
               <>
+                <img
+                  src={imgError[product._id] ? 'https://placehold.co/300x200?text=No+Image' : (product.imageURL || 'https://placehold.co/300x200?text=No+Image')}
+                  alt={product.name}
+                  onError={() => setImgError((prev) => ({ ...prev, [product._id]: true }))}
+                  className="w-full h-40 object-cover rounded mb-3"
+                />
                 <h3 className="text-lg font-semibold">{product.name}</h3>
                 <p className="text-gray-600 text-sm mb-2">{product.description}</p>
                 <p className="text-xl font-bold mb-1">${product.price}</p>
