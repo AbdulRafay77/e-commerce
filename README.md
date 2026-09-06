@@ -30,6 +30,20 @@ A full-stack e-commerce application with role-based access control, JWT authenti
 - Order status workflow (pending → shipped → delivered / cancelled) manageable from an admin dashboard
 - Personal order history for every user
 
+## Screenshots
+
+**Product catalog** — responsive grid with live images, graceful fallback for missing images, and inline admin controls
+![Products grid](screenshots/products.png)
+
+**Admin order management** — status badges with color-coded states and a dropdown to update status directly; also demonstrates graceful handling of orders referencing a since-deleted product
+![Admin all orders](screenshots/admin-orders.png)
+
+**Admin product creation** — with a live image preview as the URL is typed
+![Create product form](screenshots/create-product.png)
+
+**Customer order history**
+![My orders](screenshots/my-orders.png)
+
 ## Tech Stack
 
 **Backend:** Node.js, Express.js, MongoDB, Mongoose, JWT, bcrypt, express-rate-limit
