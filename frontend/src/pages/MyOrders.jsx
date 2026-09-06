@@ -1,6 +1,13 @@
 import { useState, useEffect } from 'react';
 import api from '../api/axios';
 
+const statusColors = {
+  pending: 'bg-yellow-100 text-yellow-800',
+  shipped: 'bg-blue-100 text-blue-800',
+  delivered: 'bg-green-100 text-green-800',
+  cancelled: 'bg-red-100 text-red-800'
+};
+
 const MyOrders = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -24,22 +31,26 @@ const MyOrders = () => {
   if (error) return <p>{error}</p>;
 
   return (
-    <div>
-      <h1>My Orders</h1>
-      {orders.map((order) => (
-        <div key={order._id}>
-          <p>Order ID: {order._id}</p>
-          <p>Status: {order.status}</p>
-          <p>Total: ${order.totalAmount}</p>
-          <ul>
-            {order.items.map((item) => (
-              <li key={item._id}>
-                Product: {item.product.name} — Qty: {item.quantity} — Price: ${item.price}
-              </li>
-            ))}
-          </ul>
-        </div>
-      ))}
+    <div className="max-w-6xl mx-auto p-6">
+      <h1 className="text-3xl font-bold mb-6">My Orders</h1>
+      <div className="flex flex-col gap-4">
+        {orders.map((order) => (
+          <div key={order._id} className="border rounded-lg shadow-md p-4">
+            <p className="text-sm text-gray-500 mb-1">Order ID: {order._id}</p>
+            <span className={`inline-block px-2 py-1 rounded text-xs font-medium ${statusColors[order.status]}`}>
+              {order.status}
+            </span>
+            <p className="text-xl font-bold mb-3">Total: ${order.totalAmount}</p>
+            <ul className="border-t pt-3 space-y-1">
+              {order.items.map((item) => (
+                <li key={item._id} className="text-sm text-gray-700">
+                  Product: {item.product.name} — Qty: {item.quantity} — Price: ${item.price}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
