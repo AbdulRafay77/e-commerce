@@ -15,7 +15,7 @@ connectBD();
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
-  origin: ['http://localhost:5173', 'https://your-vercel-app.vercel.app'],
+  origin: ['http://localhost:5173', 'https://e-commerce-blond-tau-78.vercel.app'],
   credentials: true
 }));
 
