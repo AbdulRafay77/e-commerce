@@ -59,7 +59,7 @@ const Products = () => {
             <p className="text-xl font-bold mb-1">${product.price}</p>
             <p className="text-sm text-gray-500 mb-3">In stock: {product.stock}</p>
 
-            {user && user.role === 'customer' && (
+            {user && (
               <div className="mt-auto flex gap-2">
                 <input
                   type="number"

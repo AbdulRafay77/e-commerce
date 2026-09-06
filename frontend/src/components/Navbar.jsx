@@ -15,11 +15,6 @@ const Navbar = () => {
             <span className="text-slate-300">Welcome, {user.username}</span>
             <Link to="/my-orders" className="hover:text-slate-300">My Orders</Link>
             {user.role === 'admin' && (
-              <Link to="/admin/create-product" className="hover:text-slate-300">
-                Create Product
-              </Link>
-            )}
-            {user.role === 'admin' && (
               <>
                 <Link to="/admin/create-product" className="hover:text-slate-300">Create Product</Link>
                 <Link to="/admin/orders" className="hover:text-slate-300">All Orders</Link>
