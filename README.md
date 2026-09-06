@@ -4,7 +4,7 @@ A full-stack e-commerce application with role-based access control, JWT authenti
 
 ## Live Demo
 
-- **Frontend:** [https://e-commerce-blond-tau-78.vercel.app](https://e-commerce-blond-tau-78.vercel.app)
+- **Frontend:** [https://e-commerce-abdulrafay1.vercel.app](https://e-commerce-abdulrafay1.vercel.app)
 - **Backend API:** [https://e-commerce-azud.onrender.com](https://e-commerce-azud.onrender.com)
 
 
