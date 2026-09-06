@@ -19,6 +19,12 @@ const Navbar = () => {
                 Create Product
               </Link>
             )}
+            {user.role === 'admin' && (
+              <>
+                <Link to="/admin/create-product" className="hover:text-slate-300">Create Product</Link>
+                <Link to="/admin/orders" className="hover:text-slate-300">All Orders</Link>
+              </>
+            )}
             <button
               onClick={logout}
               className="bg-red-500 hover:bg-red-600 px-3 py-1 rounded text-sm"
