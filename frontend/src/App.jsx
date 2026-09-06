@@ -4,6 +4,8 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Products from './pages/Products';
 import Navbar from './components/Navbar';
+import MyOrders from './pages/MyOrders';
+import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
   const { loading } = useAuth();
@@ -17,6 +19,14 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/products" element={<Products />} />
+        <Route
+          path="/my-orders"
+          element={
+            <ProtectedRoute>
+              <MyOrders />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );
